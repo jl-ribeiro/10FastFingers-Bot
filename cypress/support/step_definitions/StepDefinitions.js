@@ -4,13 +4,13 @@ import { And as E } from "cypress-cucumber-preprocessor/steps";
 
 var texto = null;
 
-Dado('que o usuário acessa o 10FastFingers', (done) => {
+Dado('que o usuário acessa o 10FastFingers', (/*done*/) => {
     var url = 'https://10fastfingers.com/typing-test/english';
     cy.visit(url);
 
     cy.on('uncaught:exception', (err, runnable) => {
-        expect(err.message).to.include('Responsible use of your data');
-        done();
+        //    expect(err.message).to.include('Responsible use of your data');
+        //    done();
         return false;
     });
 })
@@ -46,23 +46,23 @@ E('remove o banner', () => {
 Então('começa a digitar o texto lido', () => {
     for (let i = 0; i < texto.length; i++) {
         cy.get('#inputfield', { log: false })
-            .type(texto[i] + ' ', { log: false});
+            .type(texto[i] + ' ', { log: false });
     }
     texto = null;
-
 })
 
 E('espera o teste terminar', () => {
-    let campoVisivel = true;
-     {
-        cy.get('#row1').then(($tag) => {
-            let atributoTag = $tag.attr("style");
-            if(atributoTag.indexOf('display: none') >= 0) {
-                campoVisivel = false;
-            } else {
-                cy.wait(1000);
-                cy.get('#inputfield').type(' {backspace}');
-            }
-        })
-    }
+    verificaSeTerminou();
 })
+
+function verificaSeTerminou() {
+    cy.wait(8000);
+    cy.get("#row1").then($tag => {
+        if ($tag.is(':visible')) {
+            cy.get('#inputfield').type(' ').type('{backspace}');
+            verificaSeTerminou();
+        } else {
+            return;
+        }
+    })
+}
