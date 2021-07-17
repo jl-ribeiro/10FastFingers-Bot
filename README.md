@@ -18,7 +18,7 @@ npm i -D cypress-wait-until
 ```
 
 Os módulos e dependências já estão configuradas no projeto, então não é necessário fazê-lo.
-
+ 
 Para executar o projeto, execute na raiz do diretório o seguinte comando:
 ```bash
 npx cypress open
