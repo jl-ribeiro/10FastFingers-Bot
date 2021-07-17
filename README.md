@@ -6,7 +6,7 @@ Ao instalar, instale o cypress via linha de comando na pasta raiz do repositóri
 ```bash
 npm install cypress
 ```
-
+ 
 Feito essa etapa, instale o cypress-cucumber-preprocessor:
 ```bash
 npm install --save-dev cypress-cucumber-preprocessor
