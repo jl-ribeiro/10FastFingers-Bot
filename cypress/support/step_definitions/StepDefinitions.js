@@ -4,17 +4,19 @@ import { And as E } from "cypress-cucumber-preprocessor/steps";
 
 var texto = null;
 
-Dado('que o usuário acessa o 10FastFingers', (/*done*/) => {
+Dado('que o usuário acessa o 10FastFingers', () => {
     var url = 'https://10fastfingers.com/typing-test/english';
-    cy.visit(url);
 
     cy.on('uncaught:exception', (err, runnable) => {
         //    expect(err.message).to.include('Responsible use of your data');
-        //    done();
+        //    done(); 
         return false;
     });
+    
+    cy.visit(url);
 })
 
+/* Botão removido em nova versão, mantido no código para eventual retorno */
 E('concorda com os cookies', () => {
     cy.get('#CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll').click();
 })
@@ -46,7 +48,7 @@ E('remove o banner', () => {
 Então('começa a digitar o texto lido', () => {
     for (let i = 0; i < texto.length; i++) {
         cy.get('#inputfield', { log: false })
-            .type(texto[i] + ' ', { log: false });
+            .type(texto[i] + ' ', { log: false, scrollBehavior: false });
     }
     texto = null;
 })
@@ -59,7 +61,7 @@ function verificaSeTerminou() {
     cy.wait(8000);
     cy.get("#row1").then($tag => {
         if ($tag.is(':visible')) {
-            cy.get('#inputfield').type(' ').type('{backspace}');
+            cy.get('#inputfield').type(' ', { scrollBehavior: false }).type('{backspace}', { scrollBehavior: false });
             verificaSeTerminou();
         } else {
             return;
