@@ -33,6 +33,10 @@ E('altera o idioma para {string}', (idioma) => {
         });
 })
 
+E('acessa o modo avançado', () => {
+    cy.get('a[href*="advanced"]').first().click({ multiple:true });
+})
+
 E('realiza a leitura das palavras', () => {
     cy.get('#row1').should('be.visible');
 
