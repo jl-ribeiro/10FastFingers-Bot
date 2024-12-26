@@ -1,3 +1,8 @@
+<video width="640" height="360" controls>
+  <source src="video/demo.mp4" type="video/mp4">
+  Seu navegador não suporta vídeos HTML5.
+</video>
+
 Para executar o teste será necessário a instalação do node.js, cypress, cypress-cucumber-preprocessor e cypress-wait-until, nessa ordem.
 
 Para instalar o node.js, será necessário baixá-lo em https://nodejs.org.
